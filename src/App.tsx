@@ -3,5 +3,5 @@ export default function App() {
     <div>
       <h1>Frontend Template</h1>
     </div>
-  );
+  )
 }
