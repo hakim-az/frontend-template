@@ -32,7 +32,7 @@ export default tseslint.config(
       ...reactX.configs['recommended-typescript'].rules,
       ...reactDom.configs.recommended.rules,
       semi: ['error', 'never'],
-      'prettier/prettier': ['error', { semi: false }],
+      'prettier/prettier': ['error', { semi: false, endOfLine: 'auto' }],
     },
   }
 )

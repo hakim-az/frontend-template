@@ -1,23 +1,81 @@
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
-import { motion } from 'motion/react'
-import { ToastContainer, toast } from 'react-toastify'
+import { Suspense, lazy } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import PublicRoutes from './pages/PublicRoutes/PublicRoutes'
+import PrivateRoutes from './pages/PrivateRoutes/PrivateRoutes'
+import 'react-toastify/dist/ReactToastify.css'
 
-export default function App() {
-  const [counter, setCounter] = useState(0)
-  const notify = () => toast('Wow so easy!')
+// import DashboardProvider from './contexts/DashboardContext/DashboardProvider'
+import NotFound from './pages/NotFound/NotFound'
+import DashboardProvider from './contexts/DashboardContext/DashboardProvider'
+
+const SignUp = lazy(() => import('./pages/Auth/Signup/Signup'))
+const Login = lazy(() => import('./pages/Auth/Login/Login'))
+
+const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'))
+
+const Release = lazy(() => import('./pages/Release/Release'))
+
+function App() {
   return (
-    <motion.div className="flex min-h-svh flex-col items-center justify-center">
-      <motion.div animate={{ rotate: 360 }}>
-        <Button
-          onClick={() => {
-            setCounter(counter + 1)
-            notify()
-          }}>
-          Click me : {counter}
-        </Button>
-      </motion.div>
-      <ToastContainer />
-    </motion.div>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center w-screen h-screen">
+          Loading...
+        </div>
+      }>
+      <Routes>
+        {/* Login page */}
+        <Route
+          path="/"
+          element={
+            <PublicRoutes>
+              <Login />
+            </PublicRoutes>
+          }
+        />
+
+        {/* Signup page */}
+        <Route
+          path="/sign-up/*"
+          element={
+            <PublicRoutes>
+              <SignUp />
+            </PublicRoutes>
+          }
+        />
+
+        {/* Dashboard page */}
+        <Route
+          path="/accueil/*"
+          element={
+            <PrivateRoutes>
+              <DashboardProvider>
+                <Dashboard />
+              </DashboardProvider>
+            </PrivateRoutes>
+          }
+        />
+
+        <Route
+          path="/release/*"
+          element={
+            <PublicRoutes>
+              <Release />
+            </PublicRoutes>
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <PublicRoutes>
+              <NotFound />
+            </PublicRoutes>
+          }
+        />
+      </Routes>
+    </Suspense>
   )
 }
+
+export default App
