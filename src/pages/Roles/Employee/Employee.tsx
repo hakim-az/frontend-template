@@ -7,6 +7,7 @@ type UserRole = 'signed' | 'not-signed'
 // components
 import EmployeeLayout from '@/components/Layouts/EmployeeLayout'
 import CompleteProfile from './CompleteProfile/CompleteProfile'
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
 
 /* ROUTES */
 const NotFound = React.lazy(() => import('@/pages/NotFound/NotFound'))
@@ -33,7 +34,7 @@ function DesignerDashboard() {
       } else {
         setUserStatus('not-signed') // or handle fallback
       }
-    }, 10)
+    }, 100)
 
     return () => clearTimeout(timer)
   }, [])
@@ -41,7 +42,7 @@ function DesignerDashboard() {
   if (userStatus === null) {
     return (
       <div className="w-screen h-screen flex items-center justify-center">
-        Loading...
+        <LoadingSpinner />
       </div>
     )
   }

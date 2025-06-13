@@ -2,11 +2,11 @@ import { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import PublicRoutes from './pages/PublicRoutes/PublicRoutes'
 import PrivateRoutes from './pages/PrivateRoutes/PrivateRoutes'
-import 'react-toastify/dist/ReactToastify.css'
 
 // import DashboardProvider from './contexts/DashboardContext/DashboardProvider'
 import NotFound from './pages/NotFound/NotFound'
 import DashboardProvider from './contexts/DashboardContext/DashboardProvider'
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 
 const SignUp = lazy(() => import('./pages/Auth/Signup/Signup'))
 const Login = lazy(() => import('./pages/Auth/Login/Login'))
@@ -20,7 +20,7 @@ function App() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center w-screen h-screen">
-          Loading...
+          <LoadingSpinner />
         </div>
       }>
       <Routes>

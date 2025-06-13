@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
 
 // Define the user role type
 type UserRole = 'employee' | 'hr' | 'admin' | null
@@ -34,7 +35,7 @@ export default function Dashboard() {
   if (loading || userRole === null) {
     return (
       <div className="flex items-center justify-center w-screen h-screen">
-        Loading...
+        <LoadingSpinner />
       </div>
     )
   }
@@ -43,7 +44,7 @@ export default function Dashboard() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center w-screen h-screen">
-          Loading...
+          <LoadingSpinner />
         </div>
       }>
       {userRole === 'employee' && <Employee />}

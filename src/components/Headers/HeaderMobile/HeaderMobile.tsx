@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, useCycle } from 'framer-motion'
 import { HomeIcon } from '@heroicons/react/16/solid'
-import {
-  Cog8ToothIcon,
-  BellIcon,
-  EnvelopeIcon,
-} from '@heroicons/react/24/outline'
+// import {
+//   Cog8ToothIcon,
+//   BellIcon,
+//   EnvelopeIcon,
+// } from '@heroicons/react/24/outline'
 import MenuToggle from '../Components/MenuToggle'
 import MenuItem from '../Components/MenuItem'
 
@@ -72,6 +72,8 @@ function HeaderMobile({ navlinkMobile, nameRoute }: PropsType) {
 
   const { height } = useDimensions(containerRef)
 
+  console.log(nameRoute)
+
   return (
     <motion.nav
       initial={false}
@@ -101,7 +103,33 @@ function HeaderMobile({ navlinkMobile, nameRoute }: PropsType) {
             </MenuItem>
           </div>
         ))}
-        <motion.div
+        <div>
+          <MenuItem className="flex items-center gap-4 py-3 border-b border-b-secondGray">
+            <HomeIcon
+              className={`w-8 ${'informations-personnelles' === pathname ? 'fill-darkBlue' : 'fill-primaryblack'}`}
+            />
+            <Link
+              to="/accueil/informations-personnelles"
+              onClick={() => toggleOpen()}
+              className={`flex text-xl ${'informations-personnelles' === pathname ? 'font-bold text-darkBlue' : ''}`}>
+              Informations personnelles
+            </Link>
+          </MenuItem>
+        </div>
+        <div>
+          <MenuItem className="flex items-center gap-4 py-3 border-b border-b-secondGray">
+            <HomeIcon
+              className={`w-8 ${'informations-professionnelles' === pathname ? 'fill-darkBlue' : 'fill-primaryblack'}`}
+            />
+            <Link
+              to="/accueil/informations-professionnelles"
+              onClick={() => toggleOpen()}
+              className={`flex text-xl ${'informations-professionnelles' === pathname ? 'font-bold text-darkBlue' : ''}`}>
+              Informations professionnelles
+            </Link>
+          </MenuItem>
+        </div>
+        {/* <motion.div
           variants={sidebar}
           className="absolute bottom-16 left-0 right-0 flex mx-auto w-full items-center justify-center gap-8">
           <Link
@@ -130,7 +158,7 @@ function HeaderMobile({ navlinkMobile, nameRoute }: PropsType) {
               className={`w-9 p-1 cursor-pointer rounded hover:stroke-white hover:bg-darkBlue  ${nameRoute === 'Account-settings' ? 'stroke-white bg-darkBlue' : 'bg-[#F8F9FA] stroke-darkBlue'}`}
             />
           </Link>
-        </motion.div>
+        </motion.div> */}
       </motion.ul>
 
       <MenuToggle toggle={toggleOpen} />

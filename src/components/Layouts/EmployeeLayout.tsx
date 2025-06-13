@@ -32,11 +32,6 @@ export default function EmployeeLayout({ children }: IPramasEmployeeLayout) {
       icon: LayoutGrid,
     },
     {
-      name: 'Salariés',
-      path: '/accueil/salariés',
-      icon: LayoutGrid,
-    },
-    {
       name: 'Absences',
       path: '/accueil/absences',
       icon: LayoutGrid,

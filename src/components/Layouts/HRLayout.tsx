@@ -32,6 +32,11 @@ export default function HrLayout({ children }: IPramasHrLayout) {
       icon: LayoutGrid,
     },
     {
+      name: 'Salariés',
+      path: '/accueil/salariés',
+      icon: LayoutGrid,
+    },
+    {
       name: 'Absences',
       path: '/accueil/absences',
       icon: LayoutGrid,
